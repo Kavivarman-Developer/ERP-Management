@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { showToast } from "../../../utils/toast";
+
 
 const PURPOSES = [
   "Consultation",
@@ -15,7 +17,8 @@ const PURPOSES = [
 export default function VisitorRegistration() {
   const navigate = useNavigate();
 
-  const API = "http://192.168.0.120:8000"; // ✅ backend URL
+  const API = import.meta.env.VITE_API_URL; // ✅ backend URL
+  axios.defaults.headers.common['ngrok-skip-browser-warning'] = 'true'; // ✅
 
   const [form, setForm] = useState({
     name: "",
@@ -23,10 +26,10 @@ export default function VisitorRegistration() {
     purpose: "",
   });
 
-  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1); // 1=form, 2=otp
   const [otp, setOtp] = useState("");
+  
 
   const validate = () => {
     const e = {};
@@ -35,7 +38,6 @@ export default function VisitorRegistration() {
       e.phone = "Enter a valid 10-digit number";
     if (!form.purpose) e.purpose = "Select a purpose";
 
-    setErrors(e);
     return Object.keys(e).length === 0;
   };
 
@@ -49,10 +51,10 @@ export default function VisitorRegistration() {
         phone: form.phone,
       });
 
-      alert("OTP Sent ✅");
+     showToast("OTP sent successfully ✅");
       setStep(2);
     } catch (err) {
-      alert("Failed to send OTP ❌");
+      showToast("Failed to send OTP ❌");
     } finally {
       setLoading(false);
     }
@@ -77,24 +79,14 @@ export default function VisitorRegistration() {
           },
         });
       } else {
-        alert("Invalid OTP ❌");
+        showToast("Invalid OTP ❌");
       }
     } catch (err) {
-      alert("Verification failed ❌");
+      showToast("Verification failed ❌");
     } finally {
       setLoading(false);
     }
   };
-
-  const Field = ({ label, children, error }) => (
-    <div className="mb-4">
-      <label className="block text-sm font-medium text-slate-700 mb-1.5">
-        {label}
-      </label>
-      {children}
-      {error && <p className="text-xs text-red-600 mt-1">{error}</p>}
-    </div>
-  );
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
@@ -133,9 +125,6 @@ export default function VisitorRegistration() {
                   setForm({ ...form, name: e.target.value })
                 }
               />
-            
-
-           
               <input
                 type="tel"
                 maxLength={10}
@@ -149,8 +138,6 @@ export default function VisitorRegistration() {
                   })
                 }
               />
-
-            
               <select
                 className="w-full h-11 px-4 rounded-xl border text-sm border-slate-200 focus:border-blue-500 mb-5"
                 value={form.purpose}
@@ -176,7 +163,6 @@ export default function VisitorRegistration() {
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
             />
-          
         )}
 
         {/* BUTTON */}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
-const API = "http://192.168.0.120:8000";
+const API = import.meta.env.VITE_API_URL; // ✅ backend URL
 
 function initials(name) {
     return name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();

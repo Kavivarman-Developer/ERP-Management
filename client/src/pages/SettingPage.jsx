@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "../components/dashboards/Sidebar";
+import Sidebar from "../components/dashboards/visitors/Sidebar";
 
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState("general");

@@ -8,7 +8,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import SettingsPage from "./pages/SettingPage";
-import VisitorRegistration from "./components/dashboards/VisitorRegistration";
+import VisitorRegistration from "./components/dashboards/visitors/VisitorRegistration";
+import SuccessPage from "./components/dashboards/visitors/SuccessPage";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/analytics" element={<AnalyticsPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/visitor" element={<VisitorRegistration />} />
+          <Route path="/success" element={<SuccessPage />} />
           <Route
             path="/admin"
             element={

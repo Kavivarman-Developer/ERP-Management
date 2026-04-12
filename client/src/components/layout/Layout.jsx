@@ -1,4 +1,4 @@
-import Sidebar from "../dashboards/Sidebar";
+import Sidebar from "../dashboards/visitors/Sidebar";
 import Navbar from "../navbar/Navbar";
 
 export default function Layout({ children }) {

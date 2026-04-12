@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { logout } from "../../utils/auth";
+import { logout } from "../../../utils/auth";
 import { useState } from "react";
 
 const icons = {
@@ -18,7 +18,7 @@ const adminItems = [
   { label: "Dashboard", path: "/admin",    icon: icons.dashboard },
   { label: "analytics",  path: "/analytics", icon: icons.analytics  },
   { label: "settings",     path: "/settings",    icon: icons.settings },
-  { label: "Leaves",    path: "/leaves",   icon: icons.leaves    },
+  { label: "Leaves",    path: "/leaves",   icon: icons.leaves },
 ];
 
 function NavItem({ label, path, icon, isActive, onClick, collapsed }) {

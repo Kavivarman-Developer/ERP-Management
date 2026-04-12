@@ -1,6 +1,6 @@
 import React from "react";
 import useAnalytics from "../hooks/useAnalytics";
-import Sidebar from "../components/dashboards/Sidebar";
+import Sidebar from "../components/dashboards/visitors/Sidebar";
 
 export default function AnalyticsPage() {
   const { data: analytics, loading, error, lastUpdated, refresh } = useAnalytics();
@@ -128,6 +128,7 @@ export default function AnalyticsPage() {
 
           {!loading && !error && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              
               {/* Peak Hours Chart */}
               <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Peak Hours Today</h3>
