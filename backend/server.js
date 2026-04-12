@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config(); // ✅ First line
+dotenv.config();
 
 import express from "express";
 import cors from "cors";
@@ -16,10 +16,10 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: "*", // ✅ All origins allow — Vercel + ngrok + any
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: false // ✅ * use பண்ணும்போது false வேணும்
+  allowedHeaders: ["Content-Type", "Authorization", "ngrok-skip-browser-warning"], // ✅ இதை add பண்ணு
+  credentials: false
 }));
 
 app.options(/.*/, cors());
