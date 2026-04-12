@@ -1,13 +1,12 @@
 import express from "express";
 import Otp from "../models/Otp.js";
+import twilio from "twilio";
 
 const router = express.Router();
 
-// SEND OTP
 router.post("/send-otp", async (req, res) => {
   const { phone } = req.body;
 
-  // ✅ NEW OTP (always 6 digit number)
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
   console.log("OTP:", otp);
@@ -18,8 +17,27 @@ router.post("/send-otp", async (req, res) => {
     expiresAt: new Date(Date.now() + 5 * 60 * 1000),
   });
 
-  res.json({ success: true, message: "OTP Sent" });
+  try {
+    // ✅ CREATE CLIENT HERE (NOT TOP)
+    const client = twilio(
+      process.env.TWILIO_SID,
+      process.env.TWILIO_AUTH
+    );
+
+    await client.messages.create({
+      body: `Your OTP is ${otp}`,
+      from: process.env.TWILIO_PHONE,
+      to: `+91${phone}`,
+    });
+
+    res.json({ success: true, message: "OTP Sent" });
+
+  } catch (error) {
+    console.log("SMS Error:", error.message);
+    res.status(500).json({ success: false });
+  }
 });
+
 
 router.post("/verify-otp", async (req, res) => {
   const { phone, otp } = req.body;

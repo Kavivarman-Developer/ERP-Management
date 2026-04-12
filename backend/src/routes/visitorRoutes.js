@@ -25,8 +25,23 @@ router.post("/", async (req, res) => {
 // 🔹 GET ALL VISITORS
 router.get("/", async (req, res) => {
   try {
-    const visitors = await Visitor.find().sort({ createdAt: -1 });
+    const { date } = req.query;
+
+    let filter = {};
+
+    if (date) {
+      const start = new Date(date + "T00:00:00.000Z");
+      const end = new Date(date + "T23:59:59.999Z");
+
+      filter.checkInTime = {
+        $gte: start,
+        $lte: end,
+      };
+    }
+
+    const visitors = await Visitor.find(filter);
     res.json(visitors);
+
   } catch (err) {
     res.status(500).json(err.message);
   }
