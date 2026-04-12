@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
 const API = import.meta.env.VITE_API_URL; // ✅ backend URL
+axios.defaults.headers.common['ngrok-skip-browser-warning'] = 'true';
 
 function initials(name) {
     return name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
