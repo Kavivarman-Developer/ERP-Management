@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEnquiries, setFilters, updateEnquiry } from '../../features/enquirySlice';
-import { ENQUIRY_STAGES, ENQUIRY_SOURCES } from '../../constants/enquiryConstants';
+import { fetchEnquiries, setFilters, updateEnquiry } from '../../../features/enquirySlice';
+import { ENQUIRY_STAGES, ENQUIRY_SOURCES } from '../../../constants/enquiryConstants';
 import EnquiryDetailModal from './EnquiryDetailModal';
-import Sidebar from '../dashboards/visitors/Sidebar';
+import Sidebar from '../Sidebar';
 
 const EnquiryListContent = () => {
   const dispatch = useDispatch();

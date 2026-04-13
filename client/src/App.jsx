@@ -12,7 +12,7 @@ import VisitorRegistration from "./components/dashboards/visitors/VisitorRegistr
 import SuccessPage from "./components/dashboards/visitors/SuccessPage";
 import JobRegistorForm from "./components/dashboards/visitors/JobRegistorForm";
 // import VisitorRegistration from "./components/dashboards/VisitorRegistration";
-import Enquiry from "./pages/Enquiry";
+import Enquiry from "./components/dashboards/enquiry/Enquiry";
 
 
 function App() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import EnquiryListContent from '../components/enquiry/EnquiryListContent';
+import EnquiryListContent from './EnquiryListContent';
 
 const Enquiry = () => {
   return <EnquiryListContent />;
