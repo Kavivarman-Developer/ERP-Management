@@ -14,11 +14,16 @@ const Visitors = () => {
     const [time, setTime] = useState(new Date());
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(false);
+    const [dateFilter, setDateFilter] = useState("");
 
     const fetchVisitors = async () => {
         setLoading(true);
         try {
-            const res = await axios.get(`${API}/api/visitor`);
+            const res = await axios.get(`${API}/api/visitor`, {
+                params: {
+                    date: dateFilter
+                }
+            });
             setVisitors(res.data);
         } catch (e) {
             console.error("Failed to fetch visitors", e);
@@ -40,7 +45,7 @@ const Visitors = () => {
         fetchVisitors();
         const interval = setInterval(fetchVisitors, 30000); // every 30 sec
         return () => clearInterval(interval);
-    }, []);
+    }, [dateFilter]);
 
     useEffect(() => {
         const timer = setInterval(() => setTime(new Date()), 1000);
@@ -116,6 +121,15 @@ const Visitors = () => {
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 px-5 py-4 border-b border-gray-100">
                         <p className="text-base font-medium text-gray-900">Visitor log</p>
                         <div className="flex flex-wrap gap-2 items-center">
+
+                            {/* Date Filter */}
+                            <input
+                                type="date"
+                                value={dateFilter}
+                                onChange={(e) => setDateFilter(e.target.value)}
+                                className="text-sm px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-300 cursor-pointer"
+                            />
+
                             {/* Search */}
                             <input
                                 type="text"
