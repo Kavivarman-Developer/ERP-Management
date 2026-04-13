@@ -9,6 +9,7 @@ export default function Admin() {
   return (
     <div className="flex h-screen bg-gray-100">
       <Sidebar />
+      {/* sidebar */}
 
       <div className="flex-1 p-6 overflow-y-auto">
 
